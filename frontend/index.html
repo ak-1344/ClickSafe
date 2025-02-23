@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickSafe - Advanced URL Scanner & Cybersecurity Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+
+
+<body class="bg-black text-white font-sans">
+    <header class="bg-[#1a1a2e] text-white fixed w-full shadow-lg z-50">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <div>
+                <h1 class="text-3xl font-bold"><span class="text-[#e94560]">Click</span>Safe</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-8">
+                    <li><a href="#home" class="hover:text-[#e94560] transition">Home</a></li>
+                    <li><a href="#URL_Checker" class="hover:text-[#e94560] transition">URL Checker</a></li>
+                    <li><a href="#about" class="hover:text-[#e94560] transition">About</a></li>
+                    <li><a href="#courses" class="hover:text-[#e94560] transition">Courses</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section 1:  The home page / The landing page -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center"
+        style="background-image: linear-gradient(rgba(26, 26, 46, 0.8), rgba(15, 52, 96, 0.8)), url('https://plus.unsplash.com/premium_photo-1726754457459-d2dfa2e3a434?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
+        <h1 class="text-6xl font-bold mb-4">Fortify Your Digital Realm</h1>
+        <p class="text-2xl">Advanced Threat Detection, Cybersecurity Insights, and Expert Training</p>
+    </section>
+
+
+
+    <!-- URL Scanning page + Result container -->
+    <div id="URL_Checker" class="m-0 py-4 bg-[#16213e]"></div>
+    <section id="scanner" class="bg-[#16213e] min-h-screen py-12 shadow-lg">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl text-[#e94560] mb-6">Scan URL for Cyber Threats</h2>
+            <form id="urlForm" class="flex justify-center" onsubmit="handleSubmit(event)">
+                <input type="text" id="urlInput" placeholder="Enter URL to analyze..."
+                    class="w-2/3 p-3 text-black rounded-l-md border-4 border-[#0f3460]">
+                <button type="submit"
+                    class="bg-[#e94560] text-white px-6 py-3 rounded-r-md hover:bg-[#d63651] transition">Analyze</button>
+            </form>
+
+            <!-- Hidden Result Container -->
+            <div id="resultContainer" class="mt-8 hidden">
+                <div class="bg-[#1a1a2e] p-6 rounded-lg shadow-lg mx-auto max-w-3xl">
+                    <h3 class="text-2xl text-[#e94560] mb-4">Analysis Results:</h3>
+                    <div id="loadingSpinner" class="my-4 hidden">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#e94560] mx-auto"></div>
+                    </div>
+                    <div id="resultData" class="text-center space-y-4">
+                        <p id="urlStatus" class="text-lg"></p>
+                        <p id="threatLevel" class="text-lg"></p>
+                        <div id="detailedResults" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+
+
+
+
+
+    <!-- About section -->
+    <div id="about" class="m-0 py-4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460]"></div>
+    <section id="main" class="py-12 flex flex-wrap justify-center container mx-auto min-h-screen">
+        <div class="w-full lg:w-1/3 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg mb-8 mx-4">
+            <h2 class="text-2xl text-[#e94560] mb-4">What is Cybersecurity?</h2>
+            <p>Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks...</p>
+        </div>
+        <div class="w-full lg:w-1/3 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg mb-8 mx-4">
+            <h2 class="text-2xl text-[#e94560] mb-4">Why is Cybersecurity Important?</h2>
+            <p>In today's digital age, cyber threats are more prevalent than ever...</p>
+        </div>
+        <div class="w-full lg:w-1/3 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg mb-8 mx-4">
+            <h2 id="About" class="text-2xl text-[#e94560] mb-4">Navigating the Cyber Landscape</h2>
+            <p>In the ever-evolving digital world, cyber threats are becoming increasingly sophisticated...</p>
+        </div>
+        <div class="w-full lg:w-1/3 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg mb-8 mx-4">
+            <h2 class="text-2xl text-[#e94560] mb-4">Cybersecurity Best Practices</h2>
+            <ul class="list-disc ml-8">
+                <li>Implement strong, unique passwords for all accounts</li>
+                <li>Enable two-factor authentication wherever possible</li>
+                <li>Regularly update software and operating systems</li>
+                <li>Be cautious of unsolicited emails and suspicious links</li>
+                <li>Educate yourself and your team on the latest cyber threats</li>
+            </ul>
+        </div>
+
+        <div class="w-full lg:w-1/3 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg mb-8 mx-4">
+            <h2 class="text-2xl text-[#e94560] mb-4">How to Respond to a Cyber Attack?</h2>
+            <p>In the event of a cyber attack, it's crucial to act quickly. Disconnect affected systems, assess the
+                damage, and notify relevant authorities...</p>
+        </div>
+    </section>
+
+
+
+
+    <!-- Courses section -->
+    <div id="courses" class="m-0 py-4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460]"></div>
+    <section id="courses-section" class="py-12 container mx-auto min-h-screen">
+        <h2 class="text-3xl text-[#e94560] mb-8 text-center">Advanced Cybersecurity Courses</h2>
+        <!-- Cyber Warfare Tactics Course Row -->
+        <div class="flex flex-wrap justify-center gap-6 mb-12">
+            <div class="w-full md:w-1/4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">Cyber Warfare Basics</h3>
+                <p class="mb-4">Introduction to offensive and defensive strategies</p>
+                <p class="mb-4"><strong>Price:</strong> ₹6,999</p>
+                <button
+                    class="bg-[#e94560] text-white px-6 py-2 rounded-md hover:bg-[#d63651] transition w-full">Register
+                    Now</button>
+            </div>
+            <div class="w-full md:w-1/4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">Cyber Warfare Advanced</h3>
+                <p class="mb-4">Deep dive into tactical cybersecurity operations</p>
+                <p class="mb-4"><strong>Price:</strong> ₹12,999</p>
+                <button
+                    class="bg-[#e94560] text-white px-6 py-2 rounded-md hover:bg-[#d63651] transition w-full">Register
+                    Now</button>
+            </div>
+            <div class="w-full md:w-1/4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">Cyber Warfare Expert</h3>
+                <p class="mb-4">Master-level warfare tactics and strategies</p>
+                <p class="mb-4"><strong>Price:</strong> ₹19,999</p>
+                <button
+                    class="bg-[#e94560] text-white px-6 py-2 rounded-md hover:bg-[#d63651] transition w-full">Register
+                    Now</button>
+            </div>
+        </div>
+        <!-- Penetration Testing Course Row -->
+        <div class="flex flex-wrap justify-center gap-6 mb-12">
+            <div class="w-full md:w-1/4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">Basic Penetration Testing</h3>
+                <p class="mb-4">Learn fundamentals of system vulnerability testing</p>
+                <p class="mb-4"><strong>Price:</strong> ₹8,999</p>
+                <button
+                    class="bg-[#e94560] text-white px-6 py-2 rounded-md hover:bg-[#d63651] transition w-full">Register
+                    Now</button>
+            </div>
+            <div class="w-full md:w-1/4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">Professional Pen Testing</h3>
+                <p class="mb-4">Advanced exploitation techniques and methodologies</p>
+                <p class="mb-4"><strong>Price:</strong> ₹16,999</p>
+                <button
+                    class="bg-[#e94560] text-white px-6 py-2 rounded-md hover:bg-[#d63651] transition w-full">Register
+                    Now</button>
+            </div>
+            <div class="w-full md:w-1/4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">Expert Pen Testing</h3>
+                <p class="mb-4">Master-level penetration testing certification Learn from Experts</p>
+                <p class="mb-4"><strong>Price:</strong> ₹24,999</p>
+                <button
+                    class="bg-[#e94560] text-white px-6 py-2 rounded-md hover:bg-[#d63651] transition w-full">Register
+                    Now</button>
+            </div>
+        </div>
+        <!-- AI in Cybersecurity Course Row -->
+        <div class="flex flex-wrap justify-center gap-6">
+            <div class="w-full md:w-1/4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">AI Security Fundamentals</h3>
+                <p class="mb-4">Introduction to AI in cybersecurity</p>
+                <p class="mb-4"><strong>Price:</strong> ₹9,999</p>
+                <button
+                    class="bg-[#e94560] text-white px-6 py-2 rounded-md hover:bg-[#d63651] transition w-full">Register
+                    Now</button>
+            </div>
+            <div class="w-full md:w-1/4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">AI Threat Detection</h3>
+                <p class="mb-4">Advanced AI-powered security systems</p>
+                <p class="mb-4"><strong>Price:</strong> ₹19,999</p>
+                <button
+                    class="bg-[#e94560] text-white px-6 py-2 rounded-md hover:bg-[#d63651] transition w-full">Register
+                    Now</button>
+            </div>
+            <div class="w-full md:w-1/4 bg-gradient-to-r from-[#1a1a2e] to-[#0f3460] p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-4">AI Security Expert</h3>
+                <p class="mb-4">Master AI integration in cybersecurity</p>
+                <p class="mb-4"><strong>Price:</strong> ₹29,999</p>
+                <button
+                    class="bg-[#e94560] text-white px-6 py-2 rounded-md hover:bg-[#d63651] transition w-full">Register
+                    Now</button>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-[#1a1a2e] text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4"><span class="text-[#e94560]">Click</span>Safe</h3>
+                    <p class="text-gray-400">Advanced cybersecurity solutions for the modern digital world.</p>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-[#e94560]"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#e94560]"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#e94560]"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#home" class="hover:text-[#e94560] transition">Home</a></li>
+                        <li><a href="#URL_Checker" class="hover:text-[#e94560] transition">URL Checker</a></li>
+                        <li><a href="#about" class="hover:text-[#e94560] transition">About</a></li>
+                        <li><a href="#courses" class="hover:text-[#e94560] transition">Courses</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Email: info@clicksafe.com</li>
+                        <li>Phone: +91 123 456 7890</li>
+                        <li>Location: Mumbai, India</li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Stay updated with our latest security insights.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Enter your email" class="p-2 w-full rounded-l-md text-black">
+                        <button class="bg-[#e94560] px-4 rounded-r-md hover:bg-[#d63651] transition">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 ClickSafe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="script.js"></script>
+</html>
