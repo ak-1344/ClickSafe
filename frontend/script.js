@@ -1,26 +1,62 @@
-document.getElementById('urlForm').addEventListener('submit', function(e) {
+// Form submission handler
+document.getElementById('urlForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    var url = document.getElementById('urlInput').value;
-    var threatLevel = Math.random();
-    var result, color;
+
+    const url = document.getElementById('urlInput').value;
     
-    if (threatLevel < 0.6) {
-        result = 'Low Risk';
-        color = '#4CAF50';
-    } else if (threatLevel < 0.9) {
-        result = 'Medium Risk';
-        color = '#FFC107';
-    } else {
-        result = 'High Risk';
-        color = '#FF5252';
+    if (!url) {
+        alert('Please enter a URL!');
+        return;
     }
 
-    document.getElementById('urlInput').style.borderColor = color;
-    
-    // Update the result container
-    document.getElementById('resultContainer').classList.remove('hidden');
-    document.getElementById('urlStatus').textContent = 'URL: ' + url;
-    document.getElementById('threatLevel').textContent = 'Risk Level: ' + result + ' (Threat Score: ' + threatLevel.toFixed(2) + ')';
+    try {
+        // Show loading spinner while waiting for response
+        document.getElementById('loadingSpinner').classList.remove('hidden');
+
+        // Send URL to backend for analysis
+        const response = await fetch('http://localhost:5000/check-url', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url })
+        });
+
+        const data = await response.json();
+
+        // Hide loading spinner once response is received
+        document.getElementById('loadingSpinner').classList.add('hidden');
+
+        if (response.ok) {
+            // Set border color based on risk level
+            let color;
+            switch (data.risk) {
+                case 'Low Risk':
+                    color = '#4CAF50';
+                    break;
+                case 'Medium Risk':
+                    color = '#FFC107';
+                    break;
+                case 'High Risk':
+                    color = '#FF5252';
+                    break;
+                default:
+                    color = '#ccc';
+            }
+
+            document.getElementById('urlInput').style.borderColor = color;
+
+            // Show and update result container
+            document.getElementById('resultContainer').classList.remove('hidden');
+            document.getElementById('urlStatus').textContent = `URL: ${data.url}`;
+            document.getElementById('threatLevel').textContent = `Risk Level: ${data.risk} (Threat Score: ${data.threatScore})`;
+        } else {
+            alert(data.error || 'Failed to analyze URL');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Something went wrong! Please try again.');
+    }
 });
 
 // Smooth scrolling for navigation
