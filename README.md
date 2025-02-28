@@ -1,4 +1,3 @@
----
 
 # 🌐 ClickSafe — Stay Safe, Surf Smart 🛡️  
 
