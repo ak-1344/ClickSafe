@@ -14,7 +14,7 @@ document.getElementById('urlForm').addEventListener('submit', async function(e) 
         document.getElementById('loadingSpinner').classList.remove('hidden');
 
         // Send URL to backend for analysis
-        const response = await fetch('http://localhost:5000/check-url', {
+        const response = await fetch('https://clicksafe-i9ud.onrender.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
