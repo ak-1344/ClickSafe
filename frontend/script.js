@@ -14,10 +14,10 @@ document.getElementById('urlForm').addEventListener('submit', async function(e) 
         document.getElementById('loadingSpinner').classList.remove('hidden');
 
         // Send URL to backend for analysis
-        const response = await fetch('https://clicksafe-i9ud.onrender.com', {
+        const response = await fetch('https://clicksafe-i9ud.onrender.com/check-url', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
             },
             body: JSON.stringify({ url })
         });
