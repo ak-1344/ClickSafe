@@ -1,8 +1,10 @@
 // Import necessary libraries
-const express = require('express');   // Framework for handling API routes
-const cors = require('cors');         // Allows frontend to talk to backend
-const axios = require('axios');       // For making API requests
-require('dotenv').config();           // Loads environment variables
+import express from 'express';   // Framework for handling API routes
+import cors from 'cors';         // Allows frontend to talk to backend
+import axios from 'axios';       // For making API requests
+import dotenv from 'dotenv';     // Loads environment variables
+
+dotenv.config();
 
 // Initialize Express app
 const app = express();
@@ -26,25 +28,22 @@ app.post('/check-url', async (req, res) => {
     }
 
     try {
-        // Mock threat level (we'll replace this with real API checks)
-        let threatLevel = Math.random();
+        const encodedUrl = Buffer.from(url).toString('base64');
+        const apiResponse = await axios.get(`https://www.virustotal.com/api/v3/urls/${encodedUrl}`, {
+            headers: { 'x-apikey': process.env.VIRUSTOTAL_API_KEY }
+        });
+
+        // Extract relevant data from the API response
+        const threatLevel = apiResponse.data.data.attributes.last_analysis_stats.malicious;
         let riskCategory = '';
 
-        if (threatLevel < 0.6) {
+        if (threatLevel === 0) {
             riskCategory = 'Low Risk';
-        } else if (threatLevel < 0.9) {
+        } else if (threatLevel < 5) {
             riskCategory = 'Medium Risk';
         } else {
             riskCategory = 'High Risk';
         }
-
-        // OPTIONAL: External API integration (VirusTotal, Google Safe Browsing, etc.)
-        // Example: Calling VirusTotal API (Replace with actual API key)
-        /*
-        const apiResponse = await axios.get(`https://www.virustotal.com/api/v3/urls/${url}`, {
-            headers: { 'x-apikey': process.env.VIRUSTOTAL_API_KEY }
-        });
-        */
 
         // Send response back to frontend
         res.json({
